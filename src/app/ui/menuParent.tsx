@@ -1,38 +1,37 @@
-import { PlusCircleIcon } from '@heroicons/react/24/outline';
+'use client'
+
+import Modal from '@/app/ui/components/modal';
+import MenuTop from './components/menuTop';
+import MenuLeft from './components/menuLeft';
+import data from '@/app/lib/data.json';
+import { useState } from 'react';
 
 export default function MenuParent() {
+
+  const [showModal, setShowModal] = useState(false);  
+  const { menuTopData, menuLeftData} = data;
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+  
   return (
     <div className='menu-parent pt-4'>
         
+        {/* Modal add items */}
+        <Modal showModalState={showModal} toggleModal={toggleModal}/>
+
+        {/* Menu top */}
         <div className='div1 p-1 bg-gray-500'>
-          <span className="inline-flex -space-x-px overflow-hidden rounded-md borde shadow-sm">
-              <button
-                className="inline-block px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-200 focus:relative"
-              >
-                menu 1
-              </button>
-            <button
-              className="inline-block px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-200 focus:relative"
-            >
-              <PlusCircleIcon className="h-6 w-6 inline"/>
-            </button>
-          </span>
+          <MenuTop menuData={menuTopData} toggleModal={toggleModal} />
         </div>
 
+        {/* Menu Left */}
         <div className='div2 p-1 bg-red-500 justify-self-end'>
-          <span className="inline-flex flex-col overflow-hidden rounded-md borde shadow-sm">
-              <button
-                className="inline-block px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-200 focus:relative"
-              >
-                menu 2
-              </button>
-            <button
-              className="inline-block px-4 py-2 text-sm font-medium bg-white text-gray-700 hover:bg-gray-200 focus:relative"
-            >
-              <PlusCircleIcon className="h-6 w-6 inline"/>
-            </button>
-          </span>
+          <MenuLeft menuData={menuLeftData} toggleModal={toggleModal} />
         </div>
+
+        {/* Content */}
         <div className='div3 p-1 bg-green-400'>3</div>
       </div>
   );

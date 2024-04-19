@@ -1,4 +1,14 @@
+'use client'
+
+import { useDataContext } from "@/app/lib/dataContext";
+
 export default function MainHeader() {
+  const { user, setUser } = useDataContext();
+
+  console.log(user);
+  setUser('HOLa');
+  console.log(user);
+
   return (
     <header className="w-full">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
